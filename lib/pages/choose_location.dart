@@ -14,7 +14,6 @@ class _ChooseLocationState extends State<ChooseLocation> {
   @override
   void initState() {
     super.initState();
-    print('initState function ran');
   }
 
   @override
@@ -31,10 +30,9 @@ class _ChooseLocationState extends State<ChooseLocation> {
       body: ElevatedButton(
         onPressed: () {
           setState(() {
-            counter += 1;
           });
         },
-        child: Text('Counter is $counter'),
+        child: Text('Counter is 0'),
       )
     );
   }
