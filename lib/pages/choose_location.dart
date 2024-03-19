@@ -31,22 +31,31 @@ class _ChooseLocationState extends State<ChooseLocation> {
 
   @override
   Widget build(BuildContext context) {
-    print('build function ran');
     return Scaffold(
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
         backgroundColor: Colors.purple[100],
-        title: Text('Choose Location'),
+        title: Text('Choose a Location'),
         centerTitle: true,
         elevation: 0,
       ),
-      body: ElevatedButton(
-        onPressed: () {
-          setState(() {
-          });
-        },
-        child: Text('Counter is 0'),
-      )
+      body: ListView.builder(
+          itemCount: locations.length,
+          itemBuilder: (context, index) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(vertical: 1.0, horizontal: 4.0),
+              child: Card(
+                child: ListTile(
+                  onTap: () {},
+                  title: Text(locations[index].location),
+                  leading: CircleAvatar(
+                    backgroundImage: AssetImage('assets/${locations[index].flag}'),
+                  ),
+                ),
+              ),
+            );
+          }
+      ),
     );
   }
 }
