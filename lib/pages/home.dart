@@ -16,14 +16,14 @@ class _HomeState extends State<Home> {
     super.didChangeDependencies();
     final routeData = ModalRoute.of(context)?.settings.arguments;
     if (routeData != null) {
-      // ensure the data is a Map before assigning it
+      // Ensure the data is a Map before assigning it
       try {
         data = routeData as Map;
         if (kDebugMode) {
           print(data);
         }
       } catch (e) {
-        // handle the case where data is not a Map
+        // Handle the case where data is not a Map
         if (kDebugMode) {
           print('Data is not in the expected format: $e');
         }
@@ -34,18 +34,37 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: <Widget>[
-            ElevatedButton.icon(
-              onPressed: () {
-                Navigator.pushNamed(context, '/choose_location');
-              },
-              icon: Icon(Icons.edit_location),
-              label: Text('Edit Location'),
-            ),
-            // Add more widgets or use the 'data' map as needed
-          ],
+      body: Center( // Center the Column itself
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(0, 120, 0, 0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center, // Center the children horizontally
+            children: <Widget>[
+              ElevatedButton.icon(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/choose_location');
+                },
+                icon: Icon(Icons.edit_location),
+                label: Text('Edit Location'),
+              ),
+              SizedBox(height: 20),
+              Text(
+                data['location'] ?? 'Unknown location', // Displaying the location
+                style: TextStyle(
+                  fontSize: 28,
+                  letterSpacing: 2,
+                ),
+              ),
+              SizedBox(height: 20), // Space between location and time
+              Text(
+                data['time'] ?? 'Unknown time', // Displaying the time
+                style: TextStyle(
+                  fontSize: 66,
+                ),
+              ),
+              // Add more widgets or use the 'data' map as needed
+            ],
+          ),
         ),
       ),
     );
