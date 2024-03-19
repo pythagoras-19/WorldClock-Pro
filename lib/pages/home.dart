@@ -33,37 +33,50 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+
+    String bgImage = data['isDaytime'] ? 'day.png' : 'night.png';
+
     return Scaffold(
-      body: Center( // Center the Column itself
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(0, 120, 0, 0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center, // Center the children horizontally
-            children: <Widget>[
-              ElevatedButton.icon(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/choose_location');
-                },
-                icon: Icon(Icons.edit_location),
-                label: Text('Edit Location'),
-              ),
-              SizedBox(height: 20),
-              Text(
-                data['location'] ?? 'Unknown location', // Displaying the location
-                style: TextStyle(
-                  fontSize: 28,
-                  letterSpacing: 2,
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/$bgImage'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Center( // Center the Column itself
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(0, 120, 0, 0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                ElevatedButton.icon(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/choose_location');
+                  },
+                  icon: Icon(Icons.edit_location),
+                  label: Text('Edit Location'),
                 ),
-              ),
-              SizedBox(height: 20), // Space between location and time
-              Text(
-                data['time'] ?? 'Unknown time', // Displaying the time
-                style: TextStyle(
-                  fontSize: 66,
+                SizedBox(height: 20),
+                Text(
+                  data['location'] ?? 'Unknown location',
+                  style: TextStyle(
+                    fontSize: 28,
+                    color: data['isDaytime'] ? Colors.black : Colors.white,
+                    letterSpacing: 2,
+                  ),
                 ),
-              ),
-              // Add more widgets or use the 'data' map as needed
-            ],
+                SizedBox(height: 20),
+                Text(
+                  data['time'] ?? 'Unknown time',
+                  style: TextStyle(
+                    fontSize: 66,
+                    color: data['isDaytime'] ? Colors.black : Colors.white,
+                  ),
+                ),
+                // Add more widgets or use the 'data' map as needed
+              ],
+            ),
           ),
         ),
       ),
