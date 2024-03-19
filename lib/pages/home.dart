@@ -54,10 +54,10 @@ class _HomeState extends State<Home> {
                   onPressed: () {
                     Navigator.pushNamed(context, '/choose_location');
                   },
-                  icon: Icon(Icons.edit_location),
-                  label: Text('Edit Location'),
+                  icon: const Icon(Icons.edit_location),
+                  label: const Text('Edit Location'),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Text(
                   data['location'] ?? 'Unknown location',
                   style: TextStyle(
@@ -66,7 +66,7 @@ class _HomeState extends State<Home> {
                     letterSpacing: 2,
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Text(
                   data['time'] ?? 'Unknown time',
                   style: TextStyle(

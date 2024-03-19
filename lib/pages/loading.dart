@@ -43,7 +43,7 @@ class _LoadingState extends State<Loading> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.purple[50],
-      body: Center(
+      body: const Center(
         child: SpinKitPulsingGrid(
           color: Colors.purple,
           size: 80.0,
