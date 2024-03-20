@@ -1,7 +1,7 @@
-<p style="text-align: center;">
-   <img src="assets/world_time_logo.webp" width="150" style="display: block; margin: auto;" alt="logo"/>
+<p align="center">
+  <img src="assets/world_time_logo.webp" width="150" alt="logo"/>
 </p>
-<h1 style="text-align: center;">WorldClock Pro</h1>
+<h1 align="center">WorldClock Pro</h1>
 
 
 **WorldClock Pro** is a Flutter project that allows users to check the current time in various locations around the globe. This application combines Flutter's powerful UI capabilities with external API integration to fetch real-time data.
