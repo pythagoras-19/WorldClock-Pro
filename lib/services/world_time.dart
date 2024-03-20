@@ -13,20 +13,32 @@ class WorldTime {
 
   Future<void> getTime() async {
     try {
-      print("getTime called -------------------");
       // Make the request
       var response = await http.get(Uri.parse('http://worldtimeapi.org/api/timezone/$url'));
       Map data = jsonDecode(response.body);
 
       // Get properties from data
-      String datetime = data['datetime'];
-      String offsetHours = data['utc_offset'].substring(1, 3);
-      String offsetMinutes = data['utc_offset'].substring(4, 6); // Adding support for minutes in offset
+      DateTime now = DateTime.parse(data['datetime']);
+      String offset = data['utc_offset'];
+      bool isDst = data['dst'];
 
-      // Create DateTime object
-      DateTime now = DateTime.parse(datetime);
-      print('now: $now');
-      now = now.add(Duration(hours: int.parse(offsetHours), minutes: int.parse(offsetMinutes))); // Adjust for full offset
+      // Calculate the offset in hours and minutes
+      int offsetHours = int.parse(offset.substring(1, 3));
+      int offsetMinutes = int.parse(offset.substring(4, 6));
+      if (offset.startsWith('-')) {
+        offsetHours = -offsetHours;
+        offsetMinutes = -offsetMinutes;
+      }
+
+      // Adjust for timezone using the offset
+      now = now.add(Duration(hours: offsetHours, minutes: offsetMinutes));
+
+      // If DST is in effect, adjust the time accordingly
+      if (isDst) {
+        int dstOffsetSeconds = data['dst_offset'];
+        Duration dstOffset = Duration(seconds: dstOffsetSeconds);
+        now = now.add(dstOffset);
+      }
 
       // Set the time property
       isDaytime = now.hour >= 6 && now.hour < 20; // Adjusting the range for daytime
@@ -34,7 +46,7 @@ class WorldTime {
     } catch (e) {
       print('Caught error: $e');
       time = 'could not get time data';
-      isDaytime = false; // default value in case of an error
+      isDaytime = false; // Default value in case of an error
     }
   }
 }
