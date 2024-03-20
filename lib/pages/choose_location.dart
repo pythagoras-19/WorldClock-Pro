@@ -10,7 +10,6 @@ class ChooseLocation extends StatefulWidget {
 }
 
 class _ChooseLocationState extends State<ChooseLocation> {
-
   int counter = 0;
 
   List<WorldTime> locations = [
@@ -20,7 +19,8 @@ class _ChooseLocationState extends State<ChooseLocation> {
     WorldTime(url: 'Africa/Nairobi', location: 'Nairobi', flag: 'kenya.png'),
     WorldTime(url: 'America/Chicago', location: 'Chicago', flag: 'usa.png'),
     WorldTime(url: 'America/New_York', location: 'New York', flag: 'usa.png'),
-    WorldTime(url: 'America/Los_Angeles', location: 'Los Angeles', flag: 'usa.png'),
+    WorldTime(
+        url: 'America/Los_Angeles', location: 'Los Angeles', flag: 'usa.png'),
     WorldTime(url: 'Asia/Seoul', location: 'Seoul', flag: 'south_korea.png'),
     WorldTime(url: 'Asia/Jakarta', location: 'Jakarta', flag: 'indonesia.png'),
   ];
@@ -57,8 +57,8 @@ class _ChooseLocationState extends State<ChooseLocation> {
           itemCount: locations.length,
           itemBuilder: (context, index) {
             return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 2.0,
-                                                  horizontal: 4.0),
+              padding:
+                  const EdgeInsets.symmetric(vertical: 2.0, horizontal: 4.0),
               child: Card(
                 child: ListTile(
                   onTap: () {
@@ -66,13 +66,13 @@ class _ChooseLocationState extends State<ChooseLocation> {
                   },
                   title: Text(locations[index].location),
                   leading: CircleAvatar(
-                    backgroundImage: AssetImage('assets/${locations[index].flag}'),
+                    backgroundImage:
+                        AssetImage('assets/${locations[index].flag}'),
                   ),
                 ),
               ),
             );
-          }
-      ),
+          }),
     );
   }
 }

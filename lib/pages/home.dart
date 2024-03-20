@@ -45,11 +45,13 @@ class _HomeState extends State<Home> {
               children: <Widget>[
                 ElevatedButton.icon(
                   onPressed: () async {
-                    dynamic result = await Navigator.pushNamed(context, '/location');
+                    dynamic result =
+                        await Navigator.pushNamed(context, '/location');
                     if (result != null && result is Map) {
                       setState(() {
                         data = Map.from(result);
-                        isUpdated = true; // Mark as updated to prevent overwriting.
+                        isUpdated =
+                            true; // Mark as updated to prevent overwriting.
                         print('Data updated from button: $data');
                       });
                     }
@@ -62,7 +64,8 @@ class _HomeState extends State<Home> {
                   data['location'] ?? 'Unknown location',
                   style: TextStyle(
                     fontSize: 28,
-                    color: data['isDaytime'] == true ? Colors.black : Colors.white,
+                    color:
+                        data['isDaytime'] == true ? Colors.black : Colors.white,
                     letterSpacing: 2,
                   ),
                 ),
@@ -71,7 +74,8 @@ class _HomeState extends State<Home> {
                   data['time'] ?? 'Unknown time',
                   style: TextStyle(
                     fontSize: 66,
-                    color: data['isDaytime'] == true ? Colors.black : Colors.white,
+                    color:
+                        data['isDaytime'] == true ? Colors.black : Colors.white,
                   ),
                 ),
               ],
