@@ -13,16 +13,15 @@ class WorldTime {
 
   Future<void> getTime() async {
     try {
-      // Make the request
       var response = await http.get(Uri.parse('http://worldtimeapi.org/api/timezone/$url'));
       Map data = jsonDecode(response.body);
+      print('data' + data.toString());
 
-      // Get properties from data
+      // Get properties
       DateTime now = DateTime.parse(data['datetime']);
       String offset = data['utc_offset'];
       bool isDst = data['dst'];
 
-      // Calculate the offset in hours and minutes
       int offsetHours = int.parse(offset.substring(1, 3));
       int offsetMinutes = int.parse(offset.substring(4, 6));
       if (offset.startsWith('-')) {
@@ -30,15 +29,13 @@ class WorldTime {
         offsetMinutes = -offsetMinutes;
       }
 
-      // Adjust for timezone using the offset
       now = now.add(Duration(hours: offsetHours, minutes: offsetMinutes));
 
-      // If DST is in effect, adjust the time accordingly
-      if (isDst) {
-        int dstOffsetSeconds = data['dst_offset'];
-        Duration dstOffset = Duration(seconds: dstOffsetSeconds);
-        now = now.add(dstOffset);
-      }
+      // if (isDst) {
+      //   int dstOffsetSeconds = data['dst_offset'];
+      //   Duration dstOffset = Duration(seconds: dstOffsetSeconds);
+      //   now = now.add(dstOffset);
+      // }
 
       // Set the time property
       isDaytime = now.hour >= 6 && now.hour < 20; // Adjusting the range for daytime
