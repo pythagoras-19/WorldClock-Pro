@@ -28,15 +28,11 @@ class _LoadingState extends State<Loading> {
     if (kDebugMode) {
       print(instance.time);
     }
-    // setState(() {
-    //   time = instance.time;
-    // });
   }
   @override
   void initState() {
     super.initState();
     setUpWorldTime();
-
   }
 
   @override
